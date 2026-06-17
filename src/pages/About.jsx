@@ -1,8 +1,11 @@
 import React from 'react'
+import Navbar from '../components/shared/CustomButton'
 
-const About = () => {
+const About= () => {
   return (
-    <div>About</div>
+    <div>About
+        
+    </div>
   )
 }
 
