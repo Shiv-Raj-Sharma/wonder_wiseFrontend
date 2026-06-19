@@ -1,7 +1,12 @@
 import { CalendarCheck, Map, MapPinned, Users, Wallet } from "lucide-react";
-import React from "react";
+import React, { useState } from "react";
 
 const Features = () => {
+  const [age, setAge] = useState(10);
+  //useState hook [variableName, functionName ]
+
+
+
   const featuresData = [
     {
       icon: MapPinned,
@@ -32,7 +37,7 @@ const Features = () => {
   return (
     <section className="px-20 py-32">
       <div>
-        <h2 className="text-5xl font-bold mb-24 text-center">Features</h2>
+        <h2 onClick={()=>{setAge(age+1);}} className="text-5xl font-bold mb-24 text-center">Features age is: {age}</h2>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {featuresData.map((feature, index) => {
