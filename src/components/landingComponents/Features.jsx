@@ -1,5 +1,12 @@
-import { CalendarCheck, Map, MapPinned, Users, Wallet } from "lucide-react";
+import { CalendarCheck, InfoIcon, Map, MapPinned, Users, Wallet } from "lucide-react";
 import React, { useState } from "react";
+import {Button} from "@/components/ui/button"
+import {
+  Alert,
+  AlertAction,
+  AlertDescription,
+  AlertTitle,
+} from "@/components/ui/alert"
 
 const Features = () => {
   const [age, setAge] = useState(10);
@@ -51,10 +58,22 @@ const Features = () => {
               <h1 className=" text-center text-xl font-medium my-2">{feature.title}</h1>
 
               <p>{feature.description}</p>
+
+              <Button variant="outline">view</Button>
               </div>
           )
         })}
       </div>
+      <Alert>
+                <InfoIcon />
+                 <AlertTitle>Heads up!</AlertTitle>
+                  <AlertDescription>
+                    You can add components and dependencies to your app using the cli.
+                 </AlertDescription>
+                 <AlertAction>
+                  <Button variant="outline">Enable</Button>
+                </AlertAction>
+             </Alert>
     </section>
   );
 };
