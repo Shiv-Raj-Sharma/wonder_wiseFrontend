@@ -16,6 +16,8 @@ import { Input } from '../components/ui/input'
 import { Button } from '../components/ui/button'
 import { toast } from "sonner"
 import {Eye, EyeClosed, EyeIcon} from "lucide-react"
+import api from '../api/axios'
+import useAuth from '../hooks/useAuth'
 
 
 
@@ -26,6 +28,8 @@ const formSchema = z.object({
 })
 
 const Login = () => {
+
+  const {login} = useAuth();
 
    const [show, setShow] = React.useState(false);
     const form = useForm({
@@ -39,8 +43,27 @@ const Login = () => {
 
 
 
-const onSubmit = (data)=>{
-  console.log(data);
+const onSubmit = async (formData)=>{
+  console.log(formData);
+  const userData = data;
+  try {
+    const response = await api.post("/auth/login", formData);  // frontend data ko email ra password backend ma gayo ra api.post("/auth/login") end point bata resonse status ra token aayo ani response ma store garo 
+
+
+    if( response.status === 200 ){   // response.status ma backend la pathako status code hunxa ani yo 200 hamro known status code ho jun hamro backend ko response ma xa
+      toast.success("Logged in sucessfully"); //notification
+
+      const token = response.data.token;  // backend ko data or token
+      login(formData, token);
+      navigate("/dashboard");
+    }else{
+      toast.error(response.message || "Login Failed"); //backend ko error
+    }
+  } catch (error) {
+    toast.error(error.message || "Login Failed"); //frontend ko error like import vako xaena, api call garna xuto
+    console.log(error);  // developer ra tester ko lagi matra ho deploy garne baila remove garna
+  }
+
 }
 
   return (
